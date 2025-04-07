@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscriber extends Model
 {
-    //
+    protected $fillable = ['email', 'name', 'newsletter_id', 'status'];
+
+    public function newsletter()
+    {
+        return $this->belongsTo(Newsletter::class);
+    }
 }

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('SET NULL');
+            $table->string('title');
+            $table->text('content');
+            $table->enum('status', ['brouillon', 'envoyée', 'planifiée']);
             $table->timestamps();
         });
     }

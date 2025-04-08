@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('newsletter_id')->constrained()->onDelete('cascade');
+            $table->string('subject');
+            $table->enum('status', ['en préparation', 'envoyée', 'échouée'])->default('en préparation');
+            $table->timestamp('sent_at')->nullable();
+            $table->timestamps();
+        });
+
+
+        Schema::create('campaign_subscriber', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subscriber_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -23,5 +36,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('campaigns');
+        Schema::dropIfExists('campaign_subscriber');
     }
 };

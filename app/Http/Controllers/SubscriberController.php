@@ -16,6 +16,26 @@ class SubscriberController extends Controller
     }
 
     // Get all subscribers
+    /**
+     * @OA\Get(
+     *     path="/api/subscribers",
+     *     summary="Get all subscribers",
+     *     tags={"Subscribers"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of all subscribers",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Subscriber")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal Server Error"
+     *     )
+     * )
+     */
     public function index()
     {
         $subscribers = $this->subscriberService->getAll();
@@ -23,6 +43,34 @@ class SubscriberController extends Controller
     }
 
     // Get a single subscriber by ID
+    /**
+     * @OA\Get(
+     *     path="/api/subscribers/{id}",
+     *     summary="Get a single subscriber by ID",
+     *     tags={"Subscribers"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Subscriber ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="A single subscriber",
+     *         @OA\JsonContent(ref="#/components/schemas/Subscriber")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Subscriber not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal Server Error"
+     *     )
+     * )
+     */
     public function show($id)
     {
         $subscriber = $this->subscriberService->getById($id);
@@ -35,6 +83,31 @@ class SubscriberController extends Controller
     }
 
     // Create a new subscriber
+    /**
+     * @OA\Post(
+     *     path="/api/subscribers",
+     *     summary="Create a new subscriber",
+     *     tags={"Subscribers"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/SubscriberRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Subscriber created successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/Subscriber")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid data"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal Server Error"
+     *     )
+     * )
+     */
     public function store(SubscriberRequest $request)
     {
         $subscriber = $this->subscriberService->create($request);
@@ -43,6 +116,38 @@ class SubscriberController extends Controller
     }
 
     // Update an existing subscriber
+    /**
+     * @OA\Put(
+     *     path="/api/subscribers/{id}",
+     *     summary="Update an existing subscriber",
+     *     tags={"Subscribers"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Subscriber ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/SubscriberRequestUpdate")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Subscriber updated successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/Subscriber")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Subscriber not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal Server Error"
+     *     )
+     * )
+     */
     public function update(SubscriberRequestUpdate $request, $id)
     {
         $subscriber = $this->subscriberService->update($id, $request);
@@ -55,6 +160,37 @@ class SubscriberController extends Controller
     }
 
     // Delete a subscriber
+    /**
+     * @OA\Delete(
+     *     path="/api/subscribers/{id}",
+     *     summary="Delete a subscriber",
+     *     tags={"Subscribers"},
+     *      security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Subscriber ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Subscriber deleted successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Subscriber not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal Server Error"
+     *     )
+     * )
+     */
     public function destroy($id)
     {
         $deleted = $this->subscriberService->delete($id);

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Campaign;
 use App\Http\Requests\CampaignRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CampaignService
 {
@@ -24,8 +25,7 @@ class CampaignService
     {
 
         $validatedData = $request->validated();
-
-
+        $validatedData['user_id'] = Auth::id();
         return Campaign::create($validatedData);
     }
 

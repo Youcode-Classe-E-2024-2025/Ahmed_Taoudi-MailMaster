@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
-    protected $fillable = ['user_id', 'subject', 'status', 'sent_at'];
+    protected $fillable = ['user_id', 'subject', 'status','newsletter_id', 'sent_at'];
 
     public function user()
     {

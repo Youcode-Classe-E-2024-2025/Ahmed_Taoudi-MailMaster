@@ -170,6 +170,421 @@
                     }
                 ]
             }
+        },
+        "/api/newsletters": {
+            "get": {
+                "tags": [
+                    "Newsletters"
+                ],
+                "summary": "Get all newsletters",
+                "operationId": "48b508c17e56d6af5aab416ff8ad4451",
+                "responses": {
+                    "200": {
+                        "description": "List of newsletters",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Newsletter"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Newsletters"
+                ],
+                "summary": "Create a new newsletter",
+                "operationId": "adebf94e671e5ae506b61feb3d04e8eb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewsletterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Newsletter created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Newsletter"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/newsletters/{id}": {
+            "get": {
+                "tags": [
+                    "Newsletters"
+                ],
+                "summary": "Get a single newsletter by ID",
+                "operationId": "e8958d5c0889357c083250261b5fb625",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the newsletter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Newsletter details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Newsletter"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Newsletter not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Newsletters"
+                ],
+                "summary": "Update an existing newsletter",
+                "operationId": "da7233e26d80a9cb79a2da766c246043",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the newsletter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewsletterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Newsletter updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Newsletter"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Newsletter not found"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Newsletters"
+                ],
+                "summary": "Delete a newsletter",
+                "operationId": "0fa008516368952d0ead38bceeecce1f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the newsletter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Newsletter deleted successfully"
+                    },
+                    "404": {
+                        "description": "Newsletter not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/subscribers": {
+            "get": {
+                "tags": [
+                    "Subscribers"
+                ],
+                "summary": "Get all subscribers",
+                "operationId": "7a4ec4a0bed9cb1bb0f252aa5fde1ac4",
+                "responses": {
+                    "200": {
+                        "description": "List of all subscribers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Subscriber"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Subscribers"
+                ],
+                "summary": "Create a new subscriber",
+                "operationId": "cdbdfb57ab947416e0ecf36c82ed29e8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SubscriberRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Subscriber created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Subscriber"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/subscribers/{id}": {
+            "get": {
+                "tags": [
+                    "Subscribers"
+                ],
+                "summary": "Get a single subscriber by ID",
+                "operationId": "cb2ebc56c624405a54492302dbb13aee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subscriber ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single subscriber",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Subscriber"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Subscriber not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Subscribers"
+                ],
+                "summary": "Update an existing subscriber",
+                "operationId": "f7edc93245402315d3f961da3ec023a6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subscriber ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SubscriberRequestUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subscriber updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Subscriber"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Subscriber not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Subscribers"
+                ],
+                "summary": "Delete a subscriber",
+                "operationId": "d5182899aaacc15b1b2a04f7808dd746",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subscriber ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscriber deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Subscriber not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -208,6 +623,152 @@
                     }
                 },
                 "type": "object"
+            },
+            "Subscriber": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The unique ID of the subscriber",
+                        "type": "integer"
+                    },
+                    "email": {
+                        "description": "The subscriber's email",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "The subscriber's name",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "description": "The subscription status",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "The email address of the subscriber",
+                        "type": "string",
+                        "example": "subscriber@example.com"
+                    },
+                    "name": {
+                        "description": "The name of the subscriber",
+                        "type": "string",
+                        "example": "John Doe",
+                        "nullable": true
+                    },
+                    "status": {
+                        "description": "Subscription status",
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberRequestUpdate": {
+                "required": [
+                    "status"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "The email address of the subscriber (cannot be changed during update)",
+                        "type": "string",
+                        "example": "subscriber@example.com",
+                        "nullable": true
+                    },
+                    "name": {
+                        "description": "The name of the subscriber",
+                        "type": "string",
+                        "example": "John Doe",
+                        "nullable": true
+                    },
+                    "status": {
+                        "description": "Subscription status (active or inactive)",
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "NewsletterRequest": {
+                "required": [
+                    "title",
+                    "content",
+                    "status"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "The title of the newsletter",
+                        "type": "string",
+                        "example": "Monthly Updates"
+                    },
+                    "content": {
+                        "description": "The content of the newsletter",
+                        "type": "string",
+                        "example": "Here are the updates for this month..."
+                    },
+                    "status": {
+                        "description": "The status of the newsletter",
+                        "type": "string",
+                        "enum": [
+                            "brouillon",
+                            "envoyée",
+                            "planifiée"
+                        ],
+                        "example": "planifiée"
+                    }
+                },
+                "type": "object"
+            },
+            "Newsletter": {
+                "properties": {
+                    "id": {
+                        "description": "The unique ID of the newsletter",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "description": "The ID of the user who created the newsletter",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "title": {
+                        "description": "The title of the newsletter",
+                        "type": "string",
+                        "example": "Monthly Updates"
+                    },
+                    "content": {
+                        "description": "The content of the newsletter",
+                        "type": "string",
+                        "example": "Here are the updates for this month..."
+                    },
+                    "status": {
+                        "description": "The status of the newsletter",
+                        "type": "string",
+                        "example": "planifiée"
+                    },
+                    "created_at": {
+                        "description": "Timestamp of when the newsletter was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-07T12:34:56"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp of the last time the newsletter was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-07T12:34:56"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -223,6 +784,14 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Newsletters",
+            "description": "Newsletters"
+        },
+        {
+            "name": "Subscribers",
+            "description": "Subscribers"
         }
     ]
 }

@@ -28,4 +28,5 @@ import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
 const { user, isAuthenticated, logout } = auth;
+
 </script>  
